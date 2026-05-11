@@ -13,3 +13,10 @@ data/raw/*.csv
 Thumbs.db
 .vscode/
 .idea/
+
+# Draft files generated before organizing the portfolio repo.
+/submission_eval.csv
+/titanic_eda_feature_engineering_solution.ipynb
+/titanic_experiment_results.csv
+/titanic_resume_vi.md
+/titanic_solution.py
