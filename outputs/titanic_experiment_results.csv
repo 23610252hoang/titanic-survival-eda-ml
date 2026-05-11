@@ -1,0 +1,6 @@
+experiment,accuracy,numeric_features,categorical_features
+feature_logreg,0.8731343283582089,"Pclass, Age, Fare, SibSp, Parch, FamilySize, IsAlone, HasCabin","Sex, Embarked, Title, Deck"
+feature_rf,0.8731343283582089,"Pclass, Age, Fare, SibSp, Parch, FamilySize, IsAlone, HasCabin","Sex, Embarked, Title, Deck"
+feature_gb,0.8507462686567164,"Pclass, Age, Fare, SibSp, Parch, FamilySize, IsAlone, HasCabin","Sex, Embarked, Title, Deck"
+baseline_rf,0.8208955223880597,"Pclass, Age, Fare","Sex, Embarked"
+baseline_logreg,0.8059701492537313,"Pclass, Age, Fare","Sex, Embarked"
