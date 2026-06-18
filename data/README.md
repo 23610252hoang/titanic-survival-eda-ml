@@ -1,6 +1,6 @@
-# Data Folder
+# データフォルダ
 
-Place the raw Titanic CSV files in `data/raw/` before running the project:
+このフォルダには、ローカル実行時にTitanicのCSVファイルを配置します。
 
 ```text
 data/raw/train_local (1).csv
@@ -9,4 +9,4 @@ data/raw/eval (1).csv
 data/raw/sample_submission.csv
 ```
 
-Raw data is ignored by Git by default because these files came from a course exercise.
+元データは授業・課題用のファイルであるため、公開リポジトリではGit管理対象外にしています。

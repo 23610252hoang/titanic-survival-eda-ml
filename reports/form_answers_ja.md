@@ -1,34 +1,22 @@
-# Googleフォーム入力用：Titanic生存予測
+# 提出フォーム用回答: Titanic生存予測
 
-## valid Accuracy
-
-```text
-0.8731343283582089
-```
-
-四捨五入して入力する場合：
+## Valid Accuracy
 
 ```text
 0.873134
 ```
 
-## 実装のポイント
+## 実装内容の要約
 
-以下をそのままフォームに貼り付けてよい。
+本課題では、Titanic乗客データを用いて `Survived` を予測するモデルを作成しました。最初に `train_local`、`valid`、`eval` の行数、列数、欠損値、データ型を確認し、EDAによって `Sex`、`Pclass`、`Age`、`Cabin`、`Name` などと生存率の関係を調べました。
 
-```text
-本課題では，まずtrain_local.csv，valid.csv，eval.csvの行数，列名，欠損値，データ型を確認した。EDAでは，Sex，Pclass，Embarked，Cabin，NameなどとSurvivedの関係に注目した。特に，女性の生存率が男性より高く，1等客室の乗客の生存率が高いことを確認した。
+欠損値については、数値列を中央値、カテゴリ列を最頻値で補完しました。`Cabin` は欠損が多いため、そのまま使わず、Cabin情報の有無を表す `HasCabin` と、Cabinの先頭文字から作る `Deck` に変換しました。カテゴリ変数はOne-Hot Encodingで数値化し、未知カテゴリが出てもエラーにならないよう `handle_unknown="ignore"` を指定しました。
 
-欠損値については，数値列は中央値，カテゴリ列は最頻値で補完した。Cabinは欠損が非常に多いため，客室番号をそのまま使うのではなく，HasCabinとDeckという特徴量に変換した。カテゴリ変数であるSex，Embarked，Title，DeckはOne-Hot Encodingによって数値化した。
+特徴量エンジニアリングとして、`FamilySize`、`IsAlone`、`Title`、`HasCabin`、`Deck` を作成しました。これらはEDAから得た「性別、客室等級、家族構成、敬称、Cabin情報が生存率に関係する可能性がある」という仮説にもとづいています。
 
-特徴量エンジニアリングとして，FamilySize，IsAlone，Title，HasCabin，Deckを作成した。FamilySizeとIsAloneは家族構成，Titleは氏名に含まれる敬称，HasCabinとDeckは客室情報を表す。これらはEDAから得られた仮説にもとづいて作成した。
-
-モデルは，Logistic Regression，Random Forest，Gradient Boostingを比較した。ベースラインではPclass，Sex，Age，Fare，Embarkedを使用し，その後，新しい特徴量を追加してスコアを比較した。valid.csvに対する最良のAccuracyは0.873134であり，特徴量追加によってベースラインより改善した。
-```
+モデルは Logistic Regression、Random Forest、Gradient Boosting を比較しました。ベースラインでは `Pclass`、`Sex`、`Age`、`Fare`、`Embarked` を使用し、その後に新しい特徴量を追加してスコアを比較しました。最終的に `feature_logreg` と `feature_rf` が `valid.csv` に対して Accuracy `0.873134` となり、ベースラインより改善しました。
 
 ## Notebookファイル
-
-アップロードするファイル：
 
 ```text
 notebooks/titanic_eda_feature_engineering_solution.ipynb
@@ -36,26 +24,18 @@ notebooks/titanic_eda_feature_engineering_solution.ipynb
 
 ## eval予測CSV
 
-アップロードするファイル：
-
 ```text
 outputs/submission_eval.csv
 ```
 
-## レジュメ
-
-アップロードするファイル：
+## レポート
 
 ```text
 reports/titanic_resume_ja.md
 ```
 
-## GitHub URLを書く欄がある場合
+## GitHub URL
 
 ```text
 https://github.com/23610252hoang/titanic-survival-eda-ml
 ```
-
-## 注意
-
-名前，表示名，学術的誠実性の同意は，自分で確認して入力すること。

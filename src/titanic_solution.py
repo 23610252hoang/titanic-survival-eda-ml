@@ -26,7 +26,7 @@ def resolve_data_path(filename):
         return downloads_path
 
     raise FileNotFoundError(
-        f"Could not find {filename}. Put it in {DATA_DIR} or {DOWNLOADS_DIR}."
+        f"{filename} が見つかりません。{DATA_DIR} または {DOWNLOADS_DIR} に配置してください。"
     )
 
 
@@ -218,6 +218,6 @@ if __name__ == "__main__":
     results_df, submission_df = run_experiments()
     print(results_df.to_string(index=False))
     print()
-    print("Created:", OUTPUT_DIR / "titanic_experiment_results.csv")
-    print("Created:", OUTPUT_DIR / "submission_eval.csv")
-    print("Submission rows:", len(submission_df))
+    print("作成しました:", OUTPUT_DIR / "titanic_experiment_results.csv")
+    print("作成しました:", OUTPUT_DIR / "submission_eval.csv")
+    print("提出行数:", len(submission_df))

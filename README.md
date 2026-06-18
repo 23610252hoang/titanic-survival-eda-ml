@@ -1,50 +1,47 @@
-# Titanic Survival Prediction: EDA, Feature Engineering, and Business Insight
+# Titanic生存予測: EDA・特徴量エンジニアリング・機械学習
 
-This project predicts passenger survival on the Titanic using exploratory data analysis, feature engineering, and supervised machine learning.
+Titanic乗客データを用いて、生存有無 `Survived` を予測するデータ分析・機械学習プロジェクトです。単にAccuracyを上げるだけではなく、データ確認、EDA、仮説構築、特徴量エンジニアリング、モデル比較、評価、提出用CSV作成までの一連の流れを整理しています。
 
-The goal is not only to maximize validation accuracy, but to demonstrate a practical DA/DS/BA workflow:
+## 開発背景・完成までの流れ
 
-1. Understand the raw data.
-2. Explore relationships between passenger attributes and survival.
-3. Form hypotheses from EDA.
-4. Convert hypotheses into model-ready features.
-5. Train baseline and improved models.
-6. Evaluate on a local validation set.
-7. Translate results into business-style insights.
+- まず `train_local`、`valid`、`eval` の行数・列数・欠損値・データ型を確認しました。
+- EDAでは `Sex`、`Pclass`、`Age`、`Cabin`、`Name` などと生存率の関係を確認しました。
+- EDAから得た仮説をもとに、家族人数、単独乗船、敬称、Cabin情報の有無、Deckなどの特徴量を作成しました。
+- 欠損値補完、カテゴリ変数のOne-Hot Encoding、モデル学習を `Pipeline` と `ColumnTransformer` で一貫して処理しました。
+- Logistic Regression、Random Forest、Gradient Boostingを比較し、検証データでAccuracyを評価しました。
+- 最後に `eval` データに対する予測結果を `submission_eval.csv` として出力しました。
 
-## Project Structure
+## ディレクトリ構成
 
 ```text
 .
 ├── README.md
 ├── requirements.txt
-├── .gitignore
 ├── data/
-│   ├── README.md
-│   └── raw/
+│   └── README.md
 ├── notebooks/
 │   └── titanic_eda_feature_engineering_solution.ipynb
 ├── outputs/
 │   ├── submission_eval.csv
 │   └── titanic_experiment_results.csv
 ├── reports/
+│   ├── form_answers_ja.md
+│   ├── titanic_resume_ja.md
 │   └── titanic_resume_vi.md
 └── src/
     └── titanic_solution.py
 ```
 
-## Dataset
+## データセット
 
-The project uses the following files:
+このプロジェクトでは以下のCSVを使用します。
 
-- `train_local (1).csv`: training data with `Survived`.
-- `valid (1).csv`: validation data with `Survived`.
-- `eval (1).csv`: evaluation data without `Survived`.
-- `sample_submission.csv`: submission format sample.
+- `train_local (1).csv`: `Survived` を含む学習データ
+- `valid (1).csv`: `Survived` を含む検証データ
+- `eval (1).csv`: 予測対象データ
+- `sample_submission.csv`: 提出形式のサンプル
 
-For privacy and course-material safety, raw CSV files are not committed by default. Place them in `data/raw/` if you want to run the project locally.
-
-Expected local paths:
+元データは授業・課題用のデータであるため、公開リポジトリには含めていません。ローカルで実行する場合は以下に配置します。
 
 ```text
 data/raw/train_local (1).csv
@@ -53,33 +50,51 @@ data/raw/eval (1).csv
 data/raw/sample_submission.csv
 ```
 
-The script also supports the original local `Downloads` paths used during development.
+開発時に使用した `Downloads` 配下のパスにも対応しています。
 
-## Key EDA Findings
+## 主なEDA結果
 
-- `Sex` is strongly related to survival. Female passengers had a much higher survival rate than male passengers.
-- `Pclass` is important. First-class passengers had a higher survival rate than second- and third-class passengers.
-- `Age` has missing values, but it may capture child/adult survival differences.
-- `Cabin` is highly missing, but whether cabin information exists can still be useful.
-- `Name` contains titles such as `Mr`, `Mrs`, `Miss`, and `Master`, which encode gender, age, and social status signals.
+- `Sex`: 女性の生存率が男性より大きく高く、生存予測に強い影響があると考えました。
+- `Pclass`: 1等客室の乗客は2等・3等より生存率が高い傾向がありました。
+- `Age`: 欠損値はありますが、子ども・大人の違いを表す可能性があります。
+- `Cabin`: 欠損が多いものの、Cabin情報の有無自体が社会的・位置的な情報を含む可能性があります。
+- `Name`: `Mr`、`Mrs`、`Miss`、`Master` などの敬称から、性別・年齢・社会的立場の情報を抽出できると考えました。
 
-## Feature Engineering
+## 特徴量エンジニアリング
 
-Created features:
+作成した主な特徴量:
 
 - `FamilySize = SibSp + Parch + 1`
 - `IsAlone`
-- `Title`, extracted from `Name`
+- `Title`: `Name` から敬称を抽出
 - `HasCabin`
-- `Deck`, extracted from the first letter of `Cabin`
+- `Deck`: `Cabin` の先頭文字から抽出
 
-These features were designed from EDA hypotheses rather than added randomly.
+これらはランダムに追加した特徴量ではなく、EDAで確認した傾向をもとに設計しました。
 
-## Model Results
+## 使用技術
 
-Validation accuracy on `valid.csv`:
+- Python
+- pandas: CSV読み込み、データ確認、特徴量作成
+- scikit-learn: Pipeline、ColumnTransformer、前処理、モデル学習、評価
+- Logistic Regression / Random Forest / Gradient Boosting
+- Jupyter Notebook: EDAと説明用資料
+- Git / GitHub: バージョン管理・成果物提出
 
-| Experiment | Accuracy |
+## アピールできるスキル
+
+- データ品質確認と欠損値処理
+- EDAから仮説を立て、特徴量へ変換する力
+- 数値変数・カテゴリ変数を分けた前処理設計
+- `Pipeline` による再現性の高い機械学習フロー構築
+- 複数モデルの比較と検証データによる評価
+- 分析結果をレポートとして説明する力
+
+## モデル結果
+
+`valid.csv` に対するAccuracy:
+
+| 実験名 | Accuracy |
 | --- | ---: |
 | baseline_logreg | 0.805970 |
 | baseline_rf | 0.820896 |
@@ -87,49 +102,51 @@ Validation accuracy on `valid.csv`:
 | feature_logreg | 0.873134 |
 | feature_rf | 0.873134 |
 
-Best validation accuracy:
+最良Accuracy:
 
 ```text
 0.873134
 ```
 
-## How to Run
+特徴量を追加したモデルは、ベースラインよりも良い結果になりました。
 
-Install dependencies:
+## ビジネス分析としての価値
+
+このプロジェクトは小規模なデータ分析ですが、実務の分析プロセスに近い形で構成しています。
+
+- 目的変数に関係しそうな説明変数を見つける
+- なぜその変数が重要かを説明する
+- 仮説を特徴量として実装する
+- ベースラインと改善モデルを比較する
+- 意思決定に使える形で結果をまとめる
+
+同じ流れは、解約予測、顧客セグメント分析、営業リードスコアリング、キャンペーン反応予測、リスク分析などにも応用できます。
+
+## 実行方法
+
+依存ライブラリをインストールします。
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the full pipeline:
+パイプラインを実行します。
 
 ```bash
 python src/titanic_solution.py
 ```
 
-Outputs will be written to:
+出力ファイル:
 
 ```text
 outputs/titanic_experiment_results.csv
 outputs/submission_eval.csv
 ```
 
-## Business Analysis Perspective
+## 今後の改善案
 
-This project is a small but useful example of business analysis thinking:
-
-- Identify variables associated with an outcome.
-- Explain why those variables matter.
-- Create interpretable features.
-- Compare a baseline with improved versions.
-- Report the result in a way that supports decision-making.
-
-In a real business setting, the same workflow can be applied to churn prediction, customer segmentation, lead scoring, campaign targeting, and risk analysis.
-
-## Next Improvements
-
-- Add cross-validation.
-- Tune model hyperparameters.
-- Test additional models such as XGBoost or LightGBM.
-- Create `AgeGroup` and `FareGroup`.
-- Analyze feature importance for better explainability.
+- Cross Validationを追加する
+- ハイパーパラメータを調整する
+- XGBoostやLightGBMなどのモデルを試す
+- `AgeGroup` や `FareGroup` を作成する
+- 特徴量重要度を可視化し、説明性を高める
