@@ -1,0 +1,13 @@
+PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked
+9001,0,3,"Sample Passenger A, Mr. Taro",male,24,0,0,SAMPLE-001,8.05,,S
+9002,1,1,"Sample Passenger B, Mrs. Hana",female,36,1,0,SAMPLE-002,72.50,C12,C
+9003,1,2,"Sample Passenger C, Miss. Yui",female,19,0,0,SAMPLE-003,26.00,,S
+9004,0,3,"Sample Passenger D, Mr. Ken",male,42,0,0,SAMPLE-004,7.90,,Q
+9005,1,1,"Sample Passenger E, Master. Sora",male,8,1,2,SAMPLE-005,95.00,B21,S
+9006,0,2,"Sample Passenger F, Mr. Riku",male,31,0,0,SAMPLE-006,13.00,,S
+9007,1,3,"Sample Passenger G, Miss. Mei",female,22,1,0,SAMPLE-007,15.50,,C
+9008,0,3,"Sample Passenger H, Mr. Jun",male,,0,0,SAMPLE-008,7.75,,Q
+9009,1,2,"Sample Passenger I, Mrs. Aya",female,29,0,1,SAMPLE-009,30.00,D18,S
+9010,0,1,"Sample Passenger J, Mr. Daiki",male,55,0,0,SAMPLE-010,52.00,A10,S
+9011,1,3,"Sample Passenger K, Master. Ren",male,5,1,1,SAMPLE-011,18.00,,S
+9012,0,2,"Sample Passenger L, Mr. Kenta",male,47,0,0,SAMPLE-012,12.50,,C
